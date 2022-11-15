@@ -1,6 +1,7 @@
 package hiber;
 
 import hiber.config.AppConfig;
+import hiber.model.Car;
 import hiber.model.User;
 import hiber.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,10 +16,14 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
-      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
+//      userService.add(new User("Jony", "Bravo", "jony@.gmail.com",
+//              new Car("Toyota", 111)));
+//
+//      userService.add(new User("Brad", "Pitt", "brad@gmail.com",
+//              new Car("UAZ-Patriot", 123)));
+//
+//      userService.add(new User("Anton", "Gorodeckiy", "nightdoz@gmail.com",
+//              new Car("ZIL", 221)));
 
       List<User> users = userService.listUsers();
       for (User user : users) {
@@ -28,6 +33,13 @@ public class MainApp {
          System.out.println("Email = "+user.getEmail());
          System.out.println();
       }
+
+
+      User userTemp = userService.usersCar("ZIL", 221);
+      System.out.println(userTemp.getId());
+      System.out.println(userTemp.getFirstName());
+      System.out.println(userTemp.getLastName());
+      System.out.println(userTemp.getEmail());
 
       context.close();
    }
